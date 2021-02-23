@@ -1,0 +1,3 @@
+include ':AwesomeUI'
+include ':app'
+rootProject.name = "Bluetooth"

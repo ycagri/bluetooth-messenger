@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ycagri.awesomeui">
+
+    <application>
+        <activity
+            android:name=".chat.ChatActivity"
+            android:label="@string/title_activity_chat"
+            android:theme="@style/Theme.Bluetooth" />
+
+        <activity
+            android:name=".example.BasicChatActivity"
+            android:theme="@style/Theme.Bluetooth" />
+    </application>
+
+</manifest>

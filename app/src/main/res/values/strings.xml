@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Bluetooth</string>
+
+    <string name="type_a_message">Type a message</string>
+
+    <string name="service_description">Listening for incoming messages</string>
+
+    <string name="chats">Chats</string>
+    <string name="paired_devices">Paired Devices</string>
+    <string name="available_devices">Available Devices</string>
+
+    <string name="warning_grant_permissions">Please grant permissions to use messenger!</string>
+    <string name="warning_enable_bluetooth">Please enable bluetooth to use messenger!</string>
+</resources>

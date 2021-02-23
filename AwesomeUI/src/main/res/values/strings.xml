@@ -1,0 +1,5 @@
+<resources>
+    <string name="title_activity_chat">ChatActivity</string>
+
+    <string name="type_a_message">Type a message</string>
+</resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="colorBackgroundSentMessage" format="reference|color" />
+    <attr name="colorBackgroundReceivedMessage" format="reference|color" />
+    <attr name="colorMessageText" format="reference|color"/>
+</resources>
