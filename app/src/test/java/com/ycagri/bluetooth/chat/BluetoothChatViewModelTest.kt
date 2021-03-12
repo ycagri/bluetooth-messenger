@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.ycagri.bluetooth.database.model.BluetoothMessage
 import com.ycagri.bluetooth.datasource.DataRepository
+import com.ycagri.bluetooth.util.mock
 import org.hamcrest.CoreMatchers.notNullValue
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Rule
@@ -54,8 +55,6 @@ class BluetoothChatViewModelTest {
         messages.value = messageList
         verify(observer).onChanged(messageList)
     }
-
-    inline fun <reified T> mock(): T = mock(T::class.java)
 
     private fun createMessageList(): List<BluetoothMessage> {
         val messages = ArrayList<BluetoothMessage>()
