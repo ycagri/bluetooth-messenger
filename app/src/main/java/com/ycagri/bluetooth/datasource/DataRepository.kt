@@ -24,8 +24,12 @@ class DataRepository @Inject constructor(
         return databaseCon.retrieveMessages(pairAddress, bluetoothCon.getAddress())
     }
 
-    fun retrieveChats(): LiveData<List<BluetoothMessage>> {
-        return databaseCon.retrieveChats(bluetoothCon.getAddress())
+    fun retrieveConversations(): LiveData<List<BluetoothMessage>> {
+        return databaseCon.retrieveConversations(bluetoothCon.getAddress())
+    }
+
+    fun searchConversations(searchTerm: String): LiveData<List<BluetoothMessage>> {
+        return databaseCon.searchConversations(searchTerm)
     }
 
     fun getPairedDevices(): LiveData<List<BluetoothDevice>> {

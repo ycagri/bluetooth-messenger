@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.ycagri.awesomeui.core.ViewModelFactory
 import com.ycagri.bluetooth.main.viewmodel.AvailableDevicesViewModel
 import com.ycagri.bluetooth.main.viewmodel.BondedDevicesViewModel
-import com.ycagri.bluetooth.main.viewmodel.ChatFragmentViewModel
+import com.ycagri.bluetooth.main.viewmodel.ChatsFragmentViewModel
 import com.ycagri.bluetooth.chat.BluetoothChatViewModel
 import dagger.Binds
 import dagger.Module
@@ -16,8 +16,8 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(ChatFragmentViewModel::class)
-    abstract fun bindChatFragmentViewModel(chatFragmentViewModel: ChatFragmentViewModel): ViewModel
+    @ViewModelKey(ChatsFragmentViewModel::class)
+    abstract fun bindChatFragmentViewModel(chatFragmentViewModel: ChatsFragmentViewModel): ViewModel
 
     @Binds
     @IntoMap

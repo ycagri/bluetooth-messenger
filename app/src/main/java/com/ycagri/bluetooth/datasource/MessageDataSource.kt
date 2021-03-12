@@ -9,5 +9,7 @@ interface MessageDataSource {
 
     fun retrieveMessages(pairAddress: String?, deviceAddress: String?): LiveData<List<BluetoothMessage>>
 
-    fun retrieveChats(deviceAddress: String?): LiveData<List<BluetoothMessage>>
+    fun retrieveConversations(deviceAddress: String?): LiveData<List<BluetoothMessage>>
+
+    fun searchConversations(searchTerm: String): LiveData<List<BluetoothMessage>>
 }

@@ -18,5 +18,8 @@ abstract class BluetoothMessageDao {
     ): LiveData<List<BluetoothMessage>>
 
     @Query("Select * From tbl_messages Where sender_address!=:deviceAddress Group By sender_address Order By timestamp DESC")
-    abstract fun retrieveChats(deviceAddress: String?): LiveData<List<BluetoothMessage>>
+    abstract fun retrieveConversations(deviceAddress: String?): LiveData<List<BluetoothMessage>>
+
+    @Query("Select * From tbl_messages Where sender_name Like :searchTerm Group By sender_address Order By timestamp DESC")
+    abstract fun searchConversations(searchTerm: String): LiveData<List<BluetoothMessage>>
 }

@@ -18,7 +18,11 @@ class MessageDataConnection @Inject constructor(private val db: MessageDatabase)
         return db.bluetoothMessageDao().retrieveMessages(pairAddress, deviceAddress)
     }
 
-    override fun retrieveChats(deviceAddress: String?): LiveData<List<BluetoothMessage>> {
-        return db.bluetoothMessageDao().retrieveChats(deviceAddress)
+    override fun retrieveConversations(deviceAddress: String?): LiveData<List<BluetoothMessage>> {
+        return db.bluetoothMessageDao().retrieveConversations(deviceAddress)
+    }
+
+    override fun searchConversations(searchTerm: String): LiveData<List<BluetoothMessage>> {
+        return db.bluetoothMessageDao().searchConversations(searchTerm)
     }
 }

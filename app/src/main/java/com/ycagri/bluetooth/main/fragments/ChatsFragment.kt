@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ycagri.awesomeui.core.AppExecutors
 import com.ycagri.bluetooth.R
 import com.ycagri.bluetooth.main.adapter.ChatConversationAdapter
-import com.ycagri.bluetooth.main.viewmodel.ChatFragmentViewModel
+import com.ycagri.bluetooth.main.viewmodel.ChatsFragmentViewModel
 import com.ycagri.bluetooth.chat.BluetoothChatActivity
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -31,7 +31,7 @@ class ChatsFragment : DaggerFragment() {
     @Inject
     lateinit var appExecutors: AppExecutors
 
-    private val viewModel: ChatFragmentViewModel by viewModels { viewModelFactory }
+    private val viewModel: ChatsFragmentViewModel by viewModels { viewModelFactory }
 
     override fun onCreateView(
         inflater: LayoutInflater,
