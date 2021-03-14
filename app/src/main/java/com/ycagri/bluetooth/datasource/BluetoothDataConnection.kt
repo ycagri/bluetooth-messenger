@@ -23,7 +23,7 @@ class BluetoothDataConnection @Inject constructor(private val adapter: Bluetooth
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
-    override fun getAvailableDevices(context: Context): LiveData<List<BluetoothDevice>> {
+    override fun getAvailableDevices(context: Context?): LiveData<List<BluetoothDevice>> {
         val filter = IntentFilter(BluetoothDevice.ACTION_FOUND)
         return ReceiverLiveData(context, filter) { _, intent ->
             val device: BluetoothDevice? =

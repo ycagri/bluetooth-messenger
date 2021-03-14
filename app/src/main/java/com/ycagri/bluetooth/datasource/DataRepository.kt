@@ -48,7 +48,7 @@ class DataRepository @Inject constructor(
         }
     }
 
-    fun getAvailableDevices(context: Context): LiveData<List<BluetoothDevice>> {
+    fun getAvailableDevices(context: Context?): LiveData<List<BluetoothDevice>> {
         return bluetoothCon.getAvailableDevices(context)
     }
 

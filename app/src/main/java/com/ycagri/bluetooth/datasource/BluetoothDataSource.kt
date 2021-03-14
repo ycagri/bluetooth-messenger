@@ -8,7 +8,7 @@ interface BluetoothDataSource {
 
     fun getPairedDevices(): LiveData<List<BluetoothDevice>>
 
-    fun getAvailableDevices(context: Context): LiveData<List<BluetoothDevice>>
+    fun getAvailableDevices(context: Context?): LiveData<List<BluetoothDevice>>
 
     fun startDiscovery(): Boolean
 

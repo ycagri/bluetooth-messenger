@@ -11,7 +11,7 @@ import java.util.function.BiFunction
 
 @RequiresApi(Build.VERSION_CODES.N)
 class ReceiverLiveData<T>(
-    private val context: Context,
+    private val context: Context?,
     private val filter: IntentFilter,
     private val func: BiFunction<Context?, Intent?, T>
 ) : LiveData<T>() {
@@ -26,11 +26,11 @@ class ReceiverLiveData<T>(
 
     override fun onInactive() {
         super.onInactive()
-        context.unregisterReceiver(receiver)
+        context?.unregisterReceiver(receiver)
     }
 
     override fun onActive() {
         super.onActive()
-        context.registerReceiver(receiver, filter)
+        context?.registerReceiver(receiver, filter)
     }
 }
