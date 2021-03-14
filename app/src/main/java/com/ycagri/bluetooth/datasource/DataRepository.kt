@@ -3,6 +3,7 @@ package com.ycagri.bluetooth.datasource
 import android.bluetooth.BluetoothDevice
 import android.content.Context
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import com.ycagri.bluetooth.database.model.BluetoothMessage
 import com.ycagri.bluetooth.testing.OpenForTesting
 import javax.inject.Inject
@@ -34,6 +35,17 @@ class DataRepository @Inject constructor(
 
     fun getPairedDevices(): LiveData<List<BluetoothDevice>> {
         return bluetoothCon.getPairedDevices()
+    }
+
+    fun searchPairedDevices(searchTerm: String): LiveData<List<BluetoothDevice>> {
+        return Transformations.map(getPairedDevices()) {
+            val filteredResults = ArrayList<BluetoothDevice>()
+            for (d in it)
+                if (d.name?.contains(searchTerm) == true)
+                    filteredResults.add(d)
+
+            return@map filteredResults
+        }
     }
 
     fun getAvailableDevices(context: Context): LiveData<List<BluetoothDevice>> {

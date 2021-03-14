@@ -2,18 +2,15 @@ package com.ycagri.bluetooth.main
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.ycagri.bluetooth.datasource.DataRepository
-import com.ycagri.bluetooth.main.viewmodel.ChatsFragmentViewModel
+import com.ycagri.bluetooth.main.viewmodel.BondedDevicesViewModel
 import com.ycagri.bluetooth.util.mock
 import org.hamcrest.CoreMatchers.notNullValue
 import org.junit.Assert.assertThat
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.junit.runners.JUnit4
 import org.mockito.Mockito
 
-@RunWith(JUnit4::class)
-class ChatsFragmentViewModelTest {
+class BondedDevicesViewModelTest {
 
     @Rule
     @JvmField
@@ -21,27 +18,25 @@ class ChatsFragmentViewModelTest {
 
     private val repository = Mockito.mock(DataRepository::class.java)
 
-    private val viewModel = ChatsFragmentViewModel(repository)
+    private val viewModel = BondedDevicesViewModel(repository)
 
     @Test
     fun testNotNull() {
         assertThat(viewModel.repository, notNullValue())
-        Mockito.verify(repository, Mockito.never()).retrieveConversations()
-        viewModel.setSearchTerm("")
-        Mockito.verify(repository, Mockito.never()).retrieveConversations()
+        Mockito.verify(repository, Mockito.never()).getPairedDevices()
     }
 
     @Test
-    fun testRetrieveConversations() {
-        viewModel.chats.observeForever(mock())
+    fun testRetrievePairedDevices() {
+        viewModel.devices.observeForever(mock())
         viewModel.setSearchTerm("")
-        Mockito.verify(repository).retrieveConversations()
+        Mockito.verify(repository).getPairedDevices()
     }
 
     @Test
     fun testSearchConversations() {
-        viewModel.chats.observeForever(mock())
+        viewModel.devices.observeForever(mock())
         viewModel.setSearchTerm("search term")
-        Mockito.verify(repository).searchConversations("%search term%")
+        Mockito.verify(repository).searchPairedDevices("search term")
     }
 }
