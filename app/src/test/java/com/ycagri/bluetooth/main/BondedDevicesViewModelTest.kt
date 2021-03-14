@@ -8,8 +8,11 @@ import org.hamcrest.CoreMatchers.notNullValue
 import org.junit.Assert.assertThat
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
 import org.mockito.Mockito
 
+@RunWith(JUnit4::class)
 class BondedDevicesViewModelTest {
 
     @Rule
