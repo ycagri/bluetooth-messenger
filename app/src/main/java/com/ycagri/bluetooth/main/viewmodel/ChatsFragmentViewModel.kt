@@ -6,8 +6,10 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.ycagri.bluetooth.database.model.BluetoothMessage
 import com.ycagri.bluetooth.datasource.DataRepository
+import com.ycagri.bluetooth.testing.OpenForTesting
 import javax.inject.Inject
 
+@OpenForTesting
 class ChatsFragmentViewModel @Inject constructor(val repository: DataRepository) : ViewModel() {
 
     private val _searchTerm: MutableLiveData<String> = MutableLiveData()
