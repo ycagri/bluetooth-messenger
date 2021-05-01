@@ -4,26 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.ycagri.awesomeui.core.AppExecutors
 import com.ycagri.bluetooth.R
+import com.ycagri.bluetooth.chat.BluetoothChatActivity
+import com.ycagri.bluetooth.di.Injectable
 import com.ycagri.bluetooth.main.adapter.ChatConversationAdapter
 import com.ycagri.bluetooth.main.viewmodel.ChatsFragmentViewModel
-import com.ycagri.bluetooth.chat.BluetoothChatActivity
-import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class ChatsFragment : DaggerFragment() {
-
-    @Inject
-    lateinit var layoutManager: RecyclerView.LayoutManager
+class ChatsFragment : Fragment(), Injectable {
 
     lateinit var adapter: ChatConversationAdapter
-
-    @Inject
-    lateinit var itemDecoration: RecyclerView.ItemDecoration
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -52,8 +48,12 @@ class ChatsFragment : DaggerFragment() {
 
         val rv_chats = view.findViewById<RecyclerView>(R.id.rv_chats)
         rv_chats.setHasFixedSize(true)
-        rv_chats.layoutManager = layoutManager
-        rv_chats.addItemDecoration(itemDecoration)
+        rv_chats.addItemDecoration(
+            DividerItemDecoration(
+                requireContext(),
+                DividerItemDecoration.VERTICAL
+            )
+        )
         rv_chats.adapter = adapter
 
         viewModel.chats.observe(viewLifecycleOwner, {

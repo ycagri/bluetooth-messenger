@@ -1,30 +1,27 @@
 package com.ycagri.bluetooth.core
 
-import android.bluetooth.BluetoothAdapter
+import android.app.Activity
+import android.app.Application
 import android.content.Intent
 import androidx.core.content.ContextCompat
-import com.ycagri.bluetooth.di.AppComponent
-import com.ycagri.bluetooth.di.DaggerAppComponent
+import com.ycagri.bluetooth.di.AppInjector
 import com.ycagri.bluetooth.service.BluetoothServerService
-import dagger.android.AndroidInjector
-import dagger.android.support.DaggerApplication
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasActivityInjector
+import javax.inject.Inject
 
-class BluetoothApplication : DaggerApplication() {
+
+class BluetoothApplication : Application(), HasActivityInjector {
+
+    @Inject
+    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
 
     override fun onCreate() {
         super.onCreate()
 
+        AppInjector.init(this);
         ContextCompat.startForegroundService(this, Intent(this, BluetoothServerService::class.java))
     }
 
-    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-        val component: AppComponent = DaggerAppComponent.builder()
-            .application(this)
-            .bluetoothAdapter(BluetoothAdapter.getDefaultAdapter())
-            .build()
-
-        component.inject(this)
-
-        return component as AndroidInjector<out DaggerApplication>
-    }
+    override fun activityInjector() = dispatchingAndroidInjector
 }

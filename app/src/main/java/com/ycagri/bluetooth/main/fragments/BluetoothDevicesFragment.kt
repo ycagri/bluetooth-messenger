@@ -11,19 +11,21 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.ycagri.awesomeui.adapter.DataBoundRecyclerViewAdapter
 import com.ycagri.awesomeui.core.AppExecutors
 import com.ycagri.awesomeui.core.ViewModelFactory
 import com.ycagri.bluetooth.R
-import com.ycagri.bluetooth.databinding.ItemBluetoothDeviceBinding
-import com.ycagri.bluetooth.main.adapter.BluetoothDeviceAdapter
 import com.ycagri.bluetooth.chat.BluetoothChatActivity
-import dagger.android.support.DaggerFragment
+import com.ycagri.bluetooth.databinding.ItemBluetoothDeviceBinding
+import com.ycagri.bluetooth.di.Injectable
+import com.ycagri.bluetooth.main.adapter.BluetoothDeviceAdapter
 import javax.inject.Inject
 
-abstract class BluetoothDevicesFragment : DaggerFragment() {
+abstract class BluetoothDevicesFragment : Fragment(), Injectable {
 
     companion object {
         private const val CODE_PERMISSION_REQUEST = 99
@@ -33,12 +35,6 @@ abstract class BluetoothDevicesFragment : DaggerFragment() {
 
     @Inject
     lateinit var appExecutors: AppExecutors
-
-    @Inject
-    lateinit var layoutManager: RecyclerView.LayoutManager
-
-    @Inject
-    lateinit var itemDecoration: RecyclerView.ItemDecoration
 
     protected lateinit var adapter: DataBoundRecyclerViewAdapter<BluetoothDevice, ItemBluetoothDeviceBinding>
 
@@ -56,8 +52,12 @@ abstract class BluetoothDevicesFragment : DaggerFragment() {
 
         val devicesRV = view.findViewById<RecyclerView>(R.id.rv_bluetooth_devices)
         devicesRV.setHasFixedSize(true)
-        devicesRV.layoutManager = layoutManager
-        devicesRV.addItemDecoration(itemDecoration)
+        devicesRV.addItemDecoration(
+            DividerItemDecoration(
+                requireContext(),
+                DividerItemDecoration.VERTICAL
+            )
+        )
         devicesRV.adapter = adapter
 
         retrieveDevices()

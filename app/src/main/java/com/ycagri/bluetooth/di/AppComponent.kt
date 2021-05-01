@@ -2,11 +2,10 @@ package com.ycagri.bluetooth.di
 
 import android.app.Application
 import android.bluetooth.BluetoothAdapter
+import com.ycagri.bluetooth.core.BluetoothApplication
 import com.ycagri.bluetooth.di.datasource.RepositoryModule
 import dagger.BindsInstance
 import dagger.Component
-import dagger.android.AndroidInjector
-import dagger.android.DaggerApplication
 import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
@@ -14,7 +13,6 @@ import javax.inject.Singleton
 @Component(
     modules = [
         ActivityBindingModule::class,
-        FragmentBindingModule::class,
         ApplicationModule::class,
         AndroidSupportInjectionModule::class,
         RepositoryModule::class,
@@ -22,9 +20,9 @@ import javax.inject.Singleton
         ViewModelModule::class
     ]
 )
-interface AppComponent : AndroidInjector<DaggerApplication> {
+interface AppComponent {
 
-    override fun inject(instance: DaggerApplication)
+    fun inject(instance: BluetoothApplication)
 
     @Component.Builder
     interface Builder {
