@@ -21,4 +21,20 @@ object TestUtil {
         timestamp = System.currentTimeMillis(),
         type = type
     )
+
+    fun createMessages(count: Int, message: String): List<BluetoothMessage> {
+        return (1..count).map {
+            BluetoothMessage(
+                id = it.toLong(),
+                message = "$message $it",
+                receiverAddress = RECEIVER_ADDRESS,
+                senderAddress = SENDER_ADDRESS,
+                receiverName = RECEIVER_NAME,
+                senderName = SENDER_NAME,
+                status = 0,
+                timestamp = System.currentTimeMillis(),
+                type = it % 2
+            )
+        }
+    }
 }

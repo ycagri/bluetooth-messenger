@@ -1,14 +1,19 @@
 package com.ycagri.bluetooth.main.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.textfield.TextInputEditText
 import com.ycagri.awesomeui.core.AppExecutors
 import com.ycagri.bluetooth.R
 import com.ycagri.bluetooth.chat.BluetoothChatActivity
@@ -56,8 +61,21 @@ class ChatsFragment : Fragment(), Injectable {
         )
         rv_chats.adapter = adapter
 
+        view.findViewById<TextInputEditText>(R.id.et_chat_search)
+            .setOnEditorActionListener { v, actionId, _ ->
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    getSystemService(requireContext(), InputMethodManager::class.java)?.hideSoftInputFromWindow(v.windowToken, 0)
+                    viewModel.setSearchTerm(v.text.toString())
+                    return@setOnEditorActionListener true
+                }
+
+                return@setOnEditorActionListener false
+            }
+
         viewModel.chats.observe(viewLifecycleOwner, {
             adapter.submitList(it)
         })
+
+        viewModel.setSearchTerm("")
     }
 }
