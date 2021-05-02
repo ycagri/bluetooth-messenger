@@ -83,6 +83,7 @@ class BluetoothChatActivity :
     override fun initControls() {
         setContentView(R.layout.activity_chat)
 
+        adapter = BluetoothMessageAdapter(appExecutors)
         toolbar = findViewById(R.id.toolbar)
         chatRV = findViewById(R.id.rv_chat)
         sendButton = findViewById(R.id.btn_send)

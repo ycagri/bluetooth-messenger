@@ -3,6 +3,7 @@ package com.ycagri.awesomeui.chat
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
@@ -10,13 +11,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ycagri.awesomeui.adapter.DataBoundRecyclerViewAdapter
 import com.ycagri.awesomeui.chat.mvvm.ChatViewModel
 import com.ycagri.awesomeui.core.AppExecutors
-import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
-abstract class ChatActivity<T, V : ViewDataBinding, U> : DaggerAppCompatActivity() {
-
-    @Inject
-    lateinit var layoutManager: RecyclerView.LayoutManager
+abstract class ChatActivity<T, V : ViewDataBinding, U> : AppCompatActivity() {
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -24,7 +21,6 @@ abstract class ChatActivity<T, V : ViewDataBinding, U> : DaggerAppCompatActivity
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    @Inject
     lateinit var adapter: DataBoundRecyclerViewAdapter<T, V>
 
     protected abstract val viewModel: ChatViewModel<T, U>
@@ -46,7 +42,6 @@ abstract class ChatActivity<T, V : ViewDataBinding, U> : DaggerAppCompatActivity
 
         chatRV.let {
             it.setHasFixedSize(true)
-            it.layoutManager = layoutManager
             it.adapter = adapter
         }
 
