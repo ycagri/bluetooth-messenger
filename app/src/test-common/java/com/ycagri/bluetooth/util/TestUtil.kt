@@ -1,6 +1,8 @@
 package com.ycagri.bluetooth.util
 
+import android.bluetooth.BluetoothDevice
 import com.ycagri.bluetooth.database.model.BluetoothMessage
+import org.mockito.Mockito.`when`
 
 object TestUtil {
 
@@ -35,6 +37,19 @@ object TestUtil {
                 timestamp = System.currentTimeMillis(),
                 type = it % 2
             )
+        }
+    }
+
+    fun createBluetoothDevice(name: String, address: String): BluetoothDevice {
+        val device = mock<BluetoothDevice>()
+        `when`(device.name).thenReturn(name)
+        `when`(device.address).thenReturn(address)
+        return device
+    }
+
+    fun createDevices(count: Int, name: String, address: String): List<BluetoothDevice> {
+        return (0 until count).map {
+            createBluetoothDevice("$name ${it + 1}", "${address}_${it + 1}")
         }
     }
 }
