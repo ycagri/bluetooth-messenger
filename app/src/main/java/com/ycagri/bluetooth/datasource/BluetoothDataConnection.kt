@@ -9,6 +9,7 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ycagri.awesomeui.utils.ReceiverLiveData
+import java.util.function.BiFunction
 import javax.inject.Inject
 
 class BluetoothDataConnection @Inject constructor(private val adapter: BluetoothAdapter) :
@@ -25,15 +26,15 @@ class BluetoothDataConnection @Inject constructor(private val adapter: Bluetooth
     @RequiresApi(Build.VERSION_CODES.N)
     override fun getAvailableDevices(context: Context?): LiveData<List<BluetoothDevice>> {
         val filter = IntentFilter(BluetoothDevice.ACTION_FOUND)
-        return ReceiverLiveData(context, filter) { _, intent ->
+        return ReceiverLiveData(context, filter, BiFunction { _, intent ->
             val device: BluetoothDevice? =
                 intent?.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)
             if (device != null) {
                 availableDevices.add(device)
             }
 
-            return@ReceiverLiveData availableDevices.toList()
-        }
+            return@BiFunction availableDevices.toList()
+        })
     }
 
     override fun startDiscovery(): Boolean {
