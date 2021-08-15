@@ -1,7 +1,6 @@
 package com.ycagri.bluetooth.di
 
 import com.ycagri.bluetooth.chat.BluetoothChatActivity
-import com.ycagri.bluetooth.di.activity.BluetoothChatActivityModule
 import com.ycagri.bluetooth.di.activity.MainActivityModule
 import com.ycagri.bluetooth.main.MainActivity
 import dagger.Module
@@ -14,6 +13,6 @@ abstract class ActivityBindingModule {
     @ContributesAndroidInjector(modules = [MainActivityModule::class])
     abstract fun mainActivity(): MainActivity
 
-    @ContributesAndroidInjector(modules = [BluetoothChatActivityModule::class])
+    @ContributesAndroidInjector(modules = [MessagesFragmentModule::class])
     abstract fun messageListActivity(): BluetoothChatActivity
 }
