@@ -17,10 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Bluetooth">
 
-        <service
-            android:name=".service.BluetoothServerService"
-            android:enabled="true"
-            android:exported="false" />
+        <service android:name=".service.BluetoothServerService" />
 
         <service
             android:name=".service.BluetoothClientService"

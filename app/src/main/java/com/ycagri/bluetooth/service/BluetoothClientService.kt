@@ -1,5 +1,6 @@
 package com.ycagri.bluetooth.service
 
+import android.app.Service
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothSocket
@@ -9,6 +10,7 @@ import androidx.core.app.JobIntentService
 import com.ycagri.bluetooth.database.model.BluetoothMessage
 import com.ycagri.bluetooth.datasource.DataRepository
 import dagger.android.AndroidInjection
+import dagger.android.DispatchingAndroidInjector
 import java.util.*
 import javax.inject.Inject
 
@@ -31,6 +33,9 @@ class BluetoothClientService : JobIntentService() {
             enqueueWork(context, BluetoothClientService::class.java, 1, intent)
         }
     }
+
+    @Inject
+    lateinit var injector: DispatchingAndroidInjector<Service>
 
     @Inject
     lateinit var repository: DataRepository
