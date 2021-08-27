@@ -12,6 +12,7 @@ import com.ycagri.bluetooth.R
 import com.ycagri.bluetooth.main.fragments.AvailableDevicesFragment
 import com.ycagri.bluetooth.main.fragments.BondedDevicesFragment
 import com.ycagri.bluetooth.main.fragments.ChatsFragment
+import com.ycagri.bluetooth.service.BluetoothServerService
 import dagger.android.support.DaggerAppCompatActivity
 
 class MainActivity : DaggerAppCompatActivity() {

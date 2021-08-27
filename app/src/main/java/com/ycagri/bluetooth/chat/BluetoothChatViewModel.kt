@@ -2,7 +2,7 @@ package com.ycagri.bluetooth.chat
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.Transformations.switchMap
 import androidx.lifecycle.ViewModel
 import com.ycagri.awesomeui.utils.AbsentLiveData
 import com.ycagri.bluetooth.datasource.DataRepository
@@ -14,8 +14,10 @@ class BluetoothChatViewModel @Inject constructor(
     val repository: DataRepository
 ) : ViewModel() {
 
-    val messages = Transformations.switchMap(pairAddress) { input ->
-        repository.retrieveMessages(input)
+    val messages by lazy {
+        switchMap(pairAddress) { input ->
+            repository.retrieveMessages(input)
+        }
     }
 
     private val _pairAddress: MutableLiveData<String> = MutableLiveData()
@@ -23,7 +25,7 @@ class BluetoothChatViewModel @Inject constructor(
 
     private val _messageToSend: MutableLiveData<String> = MutableLiveData()
     private val _textMessage: MutableLiveData<TextMessage> = MutableLiveData()
-    val textMessage: LiveData<TextMessage> = Transformations.switchMap(_messageToSend) {
+    val textMessage: LiveData<TextMessage> = switchMap(_messageToSend) {
         _textMessage.value = TextMessage(pairAddress.value, _messageToSend.value)
         return@switchMap _textMessage
     }

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ycagri.awesomeui.core.AppExecutors
 import com.ycagri.bluetooth.R
@@ -54,6 +55,7 @@ class MessagesFragment : Fragment(), Injectable {
         view.findViewById<RecyclerView>(R.id.rv_messages).let {
             it.setHasFixedSize(true)
             it.adapter = adapter
+            it.layoutManager = LinearLayoutManager(it.context, LinearLayoutManager.VERTICAL, true)
         }
 
         view.findViewById<View>(R.id.btn_send).setOnClickListener {
